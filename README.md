@@ -1,4 +1,4 @@
-# Project _NAME_
+# Sheep Hunters
 
 [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet)
 
@@ -6,33 +6,31 @@ _REPLACE OR REMOVE EVERYTING BETWEEN "\_"_
 
 ### Student Info
 
--   Name: _YOUR NAME_
--   Section: _##_
+-   Name: Jessie Tang
+-   Section: 06
 
 ## Simulation Design
 
-_A brief explanation of your simulation._
+Collect fellow sheeps as your allies and hunt down the wolves coming after you and your flock.
 
 ### Controls
 
--   _List all of the actions the player can have in your simulation_
-    -   _Include how to preform each action ( keyboard, mouse, UI Input )_
-    -   _Include what impact an action has in the simulation ( if is could be unclear )_
+-   Player will move by keyboard controls(WASD)
+    -   Sheeps will be able to shoot at wolves(don't ask why they have guns)(Mouse Left or Right click)
 
 ## _Agent 1 Name_
 
-_A brief explanation of this agent._
+Follower sheep
 
 ### _State 1 Name_
 
-**Objective:** _A brief explanation of this state's objective._
+**Objective:** Master sheep gathers follower sheep
 
 #### Steering Behaviors
 
 - _List all behaviors used by this state_
-   - _If behavior has input data list it here_
-   - _eg, Flee - nearest Agent2_
-- Obstacles - _List all obstacle types this state avoids_
+   - Follower sheep will follow the master sheep
+- Obstacles - Wolf enemies that seek
 - Seperation - _List all agents this state seperates from_
    
 #### State Transistions
@@ -57,7 +55,7 @@ _A brief explanation of this agent._
 
 ## _Agent 2 Name_
 
-_A brief explanation of this agent._
+Wolf
 
 ### _State 1 Name_
 
