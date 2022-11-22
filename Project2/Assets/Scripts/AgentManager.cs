@@ -11,6 +11,7 @@ public class AgentManager : MonoBehaviour
     [SerializeField]
     SpriteRenderer spriteRenderer;
     public List<Agent> agents = new List<Agent>();
+    public List<Obstacle> obstacles = new List<Obstacle>();
     int itagentindex;
     public int Itagentindex
     {
