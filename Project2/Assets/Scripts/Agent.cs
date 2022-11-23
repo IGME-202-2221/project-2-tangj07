@@ -16,10 +16,11 @@ public abstract class Agent : MonoBehaviour
     [SerializeField]
     protected float avoidRadius = 1f;
     protected List<Vector3> tempObPos = new List<Vector3>();
+    public Obstacle[] obstacles;
     void Start()
     {
         physicsObject = GetComponent<PhysicsObject>();
-        
+        obstacles = FindObjectsOfType<Obstacle>();
     }
     public void Init(AgentManager manager)
     {
@@ -65,20 +66,6 @@ public abstract class Agent : MonoBehaviour
         }
         else { return Vector3.zero; }
     }
-    public Vector3 Seperation()
-    {
-        Vector3 seperateForce = Vector3.zero;
-        float sqrDis;
-        foreach(Agent other in manager.agents)
-        {
-            sqrDis = Vector3.SqrMagnitude(physicsObject.Position - other.physicsObject.Position);
-            if (sqrDis != 0)
-            {
-                seperateForce += Flee(other.physicsObject.Position) * (1f / sqrDis);
-            }
-        }
-        return seperateForce;
-    }
     public Vector3 CalcFuturePosition(float time)
     {
         return physicsObject.Position+physicsObject.Velocity * time;
@@ -92,7 +79,7 @@ public abstract class Agent : MonoBehaviour
         float avoidMaxSqrDit = Vector3.SqrMagnitude(furturePos - physicsObject.Position);
         avoidMaxSqrDit += avoidRadius;
         tempObPos.Clear();
-        foreach (Obstacle obstacle in manager.obstacles)
+        foreach (Obstacle obstacle in obstacles)
         {
             VtoO = obstacle.Position - physicsObject.Position;
             dotForward = Vector3.Dot(VtoO, transform.up);

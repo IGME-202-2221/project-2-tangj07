@@ -20,6 +20,6 @@ public class Wander : Agent
         totalSteeringForce += Wander();
         boundforce = StayInBounds(worldsize, boundstimecheck);
         totalSteeringForce += boundforce;
-        totalSteeringForce += Seperation();
+        //totalSteeringForce += Seperation();
     }
 }

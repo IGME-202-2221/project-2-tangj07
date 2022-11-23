@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PhysicsObject : MonoBehaviour
 {
+    public Obstacle[] obstacles;
     Vector3 direction = Vector3.zero;
     Vector3 velocity = Vector3.zero;
     Vector3 acceleration = Vector3.zero;
@@ -41,6 +42,7 @@ public class PhysicsObject : MonoBehaviour
         velocity = Vector3.ClampMagnitude(velocity, 150);
 
         direction = Random.insideUnitCircle.normalized;
+        obstacles = FindObjectsOfType<Obstacle>();
     }
     // Update is called once per frame
     void Update()

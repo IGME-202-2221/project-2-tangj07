@@ -117,11 +117,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   physicsObject: {fileID: 6586136900434743884}
-  maxSpeed: 2
+  maxSpeed: 3
   maxForce: 2
   avoidMaxRange: 5
   avoidRadius: 1
   predator: {fileID: 1744851350093929555, guid: d91e3bc932efabb4c965582d09f4bff0, type: 3}
+  player: {fileID: 1744851350093929555, guid: b3f797228c89194409033ec9bee371e3, type: 3}
+  dead: 0
+  other: []
+  follow: 1
 --- !u!114 &-3378137943952981601
 MonoBehaviour:
   m_ObjectHideFlags: 0

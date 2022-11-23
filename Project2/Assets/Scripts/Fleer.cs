@@ -4,19 +4,48 @@ using UnityEngine;
 
 public class Fleer : Agent
 {
-    [SerializeField]
-    GameObject predator;
+    public Seeker predator;
+    public GameObject player;
     public bool dead;
+    public Fleer[] other;
+    public bool follow = true;
     protected override void CalcSteeringForces()
     {
-        totalSteeringForce += Flee(predator.transform.position);
+        player = GameObject.Find("MasterSheep");
+        if (follow)
+        {
+            totalSteeringForce += Seperation();
+            totalSteeringForce += Seek(player.transform.position);
+            totalSteeringForce += AvoidObstacle();
+        }
+        else
+        {
+            if (predator != null)
+            {
+                totalSteeringForce += Seperation();
+                totalSteeringForce += Flee(predator.transform.position);
+                totalSteeringForce += AvoidObstacle();
+            }
+        }
     }
     public override void Update()
     {
-        base.Update(); 
-        if (dead)
+        base.Update();
+        other = FindObjectsOfType<Fleer>();
+        if (dead) { Destroy(gameObject); }
+    }
+    public Vector3 Seperation()
+    {
+        Vector3 seperateForce = Vector3.zero;
+        float sqrDis;
+        foreach (Fleer temp in other)
         {
-            Destroy(gameObject);
+            sqrDis = Vector3.SqrMagnitude(physicsObject.Position - temp.physicsObject.Position);
+            if (sqrDis != 0)
+            {
+                seperateForce += Flee(temp.physicsObject.Position) * (0.3f / sqrDis);
+            }
         }
+        return seperateForce;
     }
 }

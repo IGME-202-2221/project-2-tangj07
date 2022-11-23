@@ -7,9 +7,10 @@ public class CollisionManager : MonoBehaviour
 {
     //everything manager
     public CollisionDetection player;
-    public bool bullethit = false, dead, ate = false, pick = false, spawn = false;
+    public bool bullethit = false, dead, ate = false, pick = false, spawn = false, wander;
     public Shooting[] bullets;
     public Wolf[] wolves;
+    public Seeker[] wolves2;
     public Fleer[] followers;
     public PowerUp[] powerUp;
     [SerializeField] 
@@ -25,13 +26,15 @@ public class CollisionManager : MonoBehaviour
     void Update()
     {
         spawn = false;
-        bullets = GameObject.FindObjectsOfType<Shooting>();
-        wolves = GameObject.FindObjectsOfType<Wolf>();
-        followers = GameObject.FindObjectsOfType<Fleer>();
-        powerUp = GameObject.FindObjectsOfType<PowerUp>();
+        wolves2 = FindObjectsOfType<Seeker>();
+        bullets = FindObjectsOfType<Shooting>();
+        wolves = FindObjectsOfType<Wolf>();
+        followers = FindObjectsOfType<Fleer>();
+        powerUp = FindObjectsOfType<PowerUp>();
 
         foreach (Wolf temp in wolves)
         {
+            if(CircleCollision4(player, temp)) { dead = true; Gameover(); }
             foreach (Shooting temp2 in bullets)
             {
                 bullethit = CircleCollision(temp, temp2);
@@ -39,11 +42,29 @@ public class CollisionManager : MonoBehaviour
                 if (bullethit) { temp.hp -= 1; break; }
             }
         }
-        foreach (Wolf temp in wolves)
+        for (int a = 0; a < followers.Length; a++)
         {
-            foreach (Fleer temp2 in followers)
+            for (int b = 0; b < wolves2.Length; b++)
             {
-                temp2.dead = CircleCollision2(temp, temp2);
+                if(Detection(followers[a], wolves2[b])) 
+                {
+                    wolves2[b].wander = false;
+                    followers[a].follow = false;
+                    wolves2[b].assignedprey = followers[a];
+                    followers[a].predator = wolves2[b];
+                }
+                else if(!Detection(followers[a], wolves2[b]))
+                {
+                    wolves2[b].wander = true;
+                    followers[a].follow = true;
+                }
+            }
+        }
+        for (int a = 0; a < followers.Length; a++)
+        {
+            for (int b = 0; b < wolves.Length; b++)
+            {
+                if(CircleCollision2(followers[a], wolves[b])) { followers[a].dead = true; }
             }
         }
         foreach (PowerUp temp in powerUp)
@@ -68,7 +89,7 @@ public class CollisionManager : MonoBehaviour
         }
         else { return false; }
     }
-    private bool CircleCollision2(Wolf objecta, Fleer objectb)
+    private bool CircleCollision2(Fleer objecta, Wolf objectb)
     {
         SpriteRenderer spritea = objecta.GetComponent<SpriteRenderer>();
         SpriteRenderer spriteb = objectb.GetComponent<SpriteRenderer>();
@@ -95,6 +116,38 @@ public class CollisionManager : MonoBehaviour
             (spriteb.bounds.max.x - spriteb.bounds.center.x)) *
             ((spritea.bounds.max.x - spritea.bounds.center.x) +
             (spriteb.bounds.max.x - spriteb.bounds.center.x)))
+        {
+            return true;
+        }
+        else { return false; }
+    }
+    private bool CircleCollision4(CollisionDetection objecta, Wolf objectb)
+    {
+        SpriteRenderer spritea = objecta.GetComponent<SpriteRenderer>();
+        SpriteRenderer spriteb = objectb.GetComponent<SpriteRenderer>();
+
+        float distance = Mathf.Pow(spritea.bounds.center.x - spriteb.bounds.center.x, 2)
+            + Mathf.Pow(spritea.bounds.center.y - spriteb.bounds.center.y, 2);
+        if (distance <= ((spritea.bounds.max.x - spritea.bounds.center.x) +
+            (spriteb.bounds.max.x - spriteb.bounds.center.x)) *
+            ((spritea.bounds.max.x - spritea.bounds.center.x) +
+            (spriteb.bounds.max.x - spriteb.bounds.center.x)))
+        {
+            return true;
+        }
+        else { return false; }
+    }
+    private bool Detection(Fleer objecta, Seeker objectb)
+    {
+        SpriteRenderer spritea = objecta.GetComponent<SpriteRenderer>();
+        SpriteRenderer spriteb = objectb.GetComponent<SpriteRenderer>();
+
+        float distance = Mathf.Pow(spritea.bounds.center.x - spriteb.bounds.center.x, 2)
+            + Mathf.Pow(spritea.bounds.center.y - spriteb.bounds.center.y, 2);
+        if (distance <= ((spritea.bounds.max.x - spritea.bounds.center.x+1) +
+            (spriteb.bounds.max.x - spriteb.bounds.center.x + 1)) *
+            ((spritea.bounds.max.x - spritea.bounds.center.x + 1) +
+            (spriteb.bounds.max.x - spriteb.bounds.center.x + 1)))
         {
             return true;
         }

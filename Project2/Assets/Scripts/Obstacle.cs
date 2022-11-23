@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-    public float radius = 1f;
+    public float radius = 6f;
+    public float width, height;
     public Vector3 Position
     {
         get { return transform.position; }
@@ -13,4 +14,10 @@ public class Obstacle : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
     }
+    void Start()
+    {
+        width = gameObject.GetComponent<SpriteRenderer>().bounds.size.x;
+        height = gameObject.GetComponent<SpriteRenderer>().bounds.size.y;
+    }
 }
+

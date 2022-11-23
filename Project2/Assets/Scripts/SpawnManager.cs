@@ -13,7 +13,6 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     CollisionManager manager;
 
-    float two = 2;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +33,7 @@ public class SpawnManager : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(two);
+            yield return new WaitForSeconds(4);
             if (!manager.dead) { Spawn(); Spawn2(); }
         }
     }

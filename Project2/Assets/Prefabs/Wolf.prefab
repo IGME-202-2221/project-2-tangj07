@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   physicsObject: {fileID: 4374920509686444395}
-  maxSpeed: 10
+  maxSpeed: 3
   maxForce: 2
   avoidMaxRange: 5
   avoidRadius: 1
@@ -132,17 +132,21 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1744851350093929555}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2303ea7b6fdda1a438e99458bbc87790, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   physicsObject: {fileID: 4374920509686444395}
-  maxSpeed: 3
+  maxSpeed: 2
   maxForce: 2
   avoidMaxRange: 5
   avoidRadius: 1
-  prey: {fileID: 1744851350093929555, guid: 89332b7aa8eeee14baec7e578952f59e, type: 3}
+  assignedprey: {fileID: 0}
+  other: []
+  wander: 0
+  worldsize: {x: 0, y: 0}
+  boundstimecheck: 2
 --- !u!114 &869010561741662830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,4 +181,3 @@ MonoBehaviour:
   width: 0
   height: 0
   temp: {fileID: 0}
-  manager: {fileID: 0}

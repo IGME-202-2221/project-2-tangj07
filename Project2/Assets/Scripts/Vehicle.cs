@@ -5,12 +5,13 @@ using UnityEngine.InputSystem;
 
 public class Vehicle : MonoBehaviour
 {
+    public Obstacle[] obstacles;
     [SerializeField]
     float speed = 1f;
     Vector3 position = Vector3.zero;
     Vector3 direction = Vector3.zero;
     Vector3 velocity = Vector3.zero;
-    private float delay = 0.3f, speedtime = 0, cooldown = 0, bullettime=-1;
+    private float delay = 0.3f, bullettime=-1;
     public GameObject bullet;
     bool fire;
     [SerializeField]
@@ -19,6 +20,7 @@ public class Vehicle : MonoBehaviour
     void Start()
     {
         manager = FindObjectOfType<CollisionManager>();
+        obstacles = FindObjectsOfType<Obstacle>();
         position = transform.position;
     }
 
@@ -40,9 +42,6 @@ public class Vehicle : MonoBehaviour
         Camera camera = Camera.main;
         float screenAspect = (float)Screen.width / (float)Screen.height;
         float cameraHeight = camera.orthographicSize * 2;
-        Bounds bounds = new Bounds(
-            camera.transform.position,
-            new Vector3(cameraHeight * screenAspect, cameraHeight, 0)); 
         float height = cameraHeight*0.5f;
         float width = cameraHeight * screenAspect/2;
         if (position.y > height)
@@ -69,23 +68,7 @@ public class Vehicle : MonoBehaviour
         {
             fire = false;
         }
-        if(speedtime>0)
-        {
-            cooldown -= Time.deltaTime;
-            speedtime -= Time.deltaTime;
-        }
-        else if (cooldown <= 0)
-        {
-            speed = 3;
-        }
-        if (speedtime < 0)
-        {
-            speedtime = 0;
-        }
-        if(cooldown < 0)
-        {
-            cooldown = 0;
-        }
+        //ObstacleStuff();
     }
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -107,8 +90,14 @@ public class Vehicle : MonoBehaviour
             fire = true;
         }
     }
-    public void Speedup()
+    public void ObstacleStuff()
     {
-        if(speedtime<=0) { speed = 5; cooldown = 2; speedtime = 4; }
+        if (position.x < (-obstacles[0].Position.x + (obstacles[0].width / 2))&& position.x < (-obstacles[0].Position.x - (obstacles[0].width / 2)))
+        {
+            if(position.y< (obstacles[0].Position.y + (obstacles[0].height / 2))&& position.y > (obstacles[0].Position.y - (obstacles[0].height / 2)))
+            {
+                if(position.x < (-obstacles[0].Position.x + (obstacles[0].width / 2))) { position.x = -obstacles[0].Position.x + (obstacles[0].width / 2); }
+            }
+        }
     }
 }
