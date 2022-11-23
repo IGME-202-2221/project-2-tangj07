@@ -103,12 +103,15 @@ When a wolf is near enough to a sheep, they will begin chasing them.
 
 -   _List all project sources here –models, textures, sound clips, assets, etc._
 -   _If an asset is from the Unity store, include a link to the page and the author’s name_
+All assets will be my own.
 
 ## Make it Your Own
 
 - _List out what you added to your game to make it different for you_
+In order to spawn more follower sheep, the player needs to collect an item that spawns in the world.
 - _If you will add more agents or states make sure to list here and add it to the documention above_
 - _If you will add your own assets make sure to list it here and add it to the Sources section
+I will be drawing my own assets.
 
 ## Known Issues
 
