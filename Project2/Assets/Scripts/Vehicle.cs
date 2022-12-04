@@ -15,11 +15,11 @@ public class Vehicle : MonoBehaviour
     public GameObject bullet;
     bool fire;
     [SerializeField]
-    CollisionManager manager;
+    AgentManager manager;
     // Start is called before the first frame update
     void Start()
     {
-        manager = FindObjectOfType<CollisionManager>();
+        manager = FindObjectOfType<AgentManager>();
         obstacles = FindObjectsOfType<Obstacle>();
         position = transform.position;
     }
@@ -88,16 +88,6 @@ public class Vehicle : MonoBehaviour
                 bullettime = delay;
             }
             fire = true;
-        }
-    }
-    public void ObstacleStuff()
-    {
-        if (position.x < (-obstacles[0].Position.x + (obstacles[0].width / 2))&& position.x < (-obstacles[0].Position.x - (obstacles[0].width / 2)))
-        {
-            if(position.y< (obstacles[0].Position.y + (obstacles[0].height / 2))&& position.y > (obstacles[0].Position.y - (obstacles[0].height / 2)))
-            {
-                if(position.x < (-obstacles[0].Position.x + (obstacles[0].width / 2))) { position.x = -obstacles[0].Position.x + (obstacles[0].width / 2); }
-            }
         }
     }
 }

@@ -31,8 +31,8 @@ Transform:
   m_GameObject: {fileID: 1744851350093929555}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 42527c2747082cd43b75e586751d7b09, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ec3fdb9e07e4daf45a17c5d8bbfed1a7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0956049c3349339468b97649b3e9105b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  obstacles: []
   mass: 1
   useGravity: 0
   gravity: {x: 0, y: -1, z: 0}
@@ -123,6 +124,7 @@ MonoBehaviour:
   maxForce: 2
   avoidMaxRange: 5
   avoidRadius: 1
+  obstacles: []
   worldsize: {x: 0, y: 0}
   boundstimecheck: 2
 --- !u!114 &5083071208026353427
@@ -138,15 +140,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   physicsObject: {fileID: 4374920509686444395}
-  maxSpeed: 2
-  maxForce: 2
+  maxSpeed: 4
+  maxForce: 1
   avoidMaxRange: 5
   avoidRadius: 1
-  assignedprey: {fileID: 0}
+  obstacles: []
+  assignedprey: {fileID: -6040065714058514193, guid: 89332b7aa8eeee14baec7e578952f59e, type: 3}
   other: []
   wander: 0
   worldsize: {x: 0, y: 0}
-  boundstimecheck: 2
 --- !u!114 &869010561741662830
 MonoBehaviour:
   m_ObjectHideFlags: 0
